@@ -1,0 +1,24 @@
+<div class="app">
+  <div class="wrapper">
+    <h2 class="wrapper__title">Đăng ký</h2>
+    <form action="" (ngSubmit)="onSubmit(rfRegister)" class="wrapper__form" [formGroup]="rfRegister">
+      <!--      <label for="inputSurname">Họ</label>-->
+      <!--      form tương ứng với form gần nhất hoặc form array-->
+      <input id="inputSurname" class="inputSurname" type="text" placeholder="Tên" formControlName="inputSurname">
+      <!--      <label for="inputName">Tên</label>-->
+      <input id="inputName" class="inputName" type="text" placeholder="Họ" formControlName="inputName">
+      <!--      <label for="inputEmail" class="label__email">Email</label>-->
+      <input id="inputEmail" class="inputEmail" type="text" placeholder="Email" formControlName="inputEmail">
+      <span class="block">Sử dụng chữ cái</span>
+
+      <input type="submit">
+    </form>
+
+  </div>
+  <pre>
+    {{rfRegister.value | json}}
+  </pre>
+<!--  <pre>-->
+<!--        {{rfRegister.controls|json}}-->
+<!--  </pre>-->
+</div>
