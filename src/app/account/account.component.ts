@@ -11,7 +11,7 @@ export class AccountComponent implements OnInit{
 
   ngOnInit() {
     this.rfRegister = new FormGroup({ //inputSurName thuộc vào rfRegister
-      inputSurname: new FormControl('huy', Validators.required),
+      inputSurname: new FormControl('', [Validators.required]),
       inputName: new FormControl('',Validators.required),
       inputEmail: new FormControl('',Validators.required)
     })

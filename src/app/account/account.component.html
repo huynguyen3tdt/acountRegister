@@ -1,24 +1,36 @@
 <div class="app">
   <div class="wrapper">
     <h2 class="wrapper__title">Đăng ký</h2>
-    <form action="" (ngSubmit)="onSubmit(rfRegister)" class="wrapper__form" [formGroup]="rfRegister">
-      <!--      <label for="inputSurname">Họ</label>-->
+    <form action="" (ngSubmit)="onSubmit(rfRegister)" class="form__div" [formGroup]="rfRegister">
       <!--      form tương ứng với form gần nhất hoặc form array-->
-      <input id="inputSurname" class="inputSurname" type="text" placeholder="Tên" formControlName="inputSurname">
-      <!--      <label for="inputName">Tên</label>-->
-      <input id="inputName" class="inputName" type="text" placeholder="Họ" formControlName="inputName">
-      <!--      <label for="inputEmail" class="label__email">Email</label>-->
-      <input id="inputEmail" class="inputEmail" type="text" placeholder="Email" formControlName="inputEmail">
-      <span class="block">Sử dụng chữ cái</span>
 
-      <input type="submit">
+      <div class="wrapper__form">
+        <div class="form__item">
+          <input class="item__input" type="text" placeholder="Tên" formControlName="inputSurname">
+          <span class="item__error" *ngIf="rfRegister.controls['inputSurname'].errors">Surname is required</span>
+        </div>
+        <div class="form__item">
+          <input class="item__input" type="text" placeholder="Họ" formControlName="inputName">
+          <span class="item__error" *ngIf="rfRegister.controls['inputSurname'].errors">Name is Required</span>
+        </div>
+        <div class="form__item form__email">
+          <input class="item__input" type="text" placeholder="Email" formControlName="inputEmail">
+        </div>
+
+        <span class="">
+        Sử dụng chữ cái, số và dấu chấm</span>
+      </div>
+
+      <button class="btn__submit" type="submit" >Tiếp theo</button>
     </form>
 
   </div>
-  <pre>
+
+</div>
+<pre>
     {{rfRegister.value | json}}
   </pre>
-<!--  <pre>-->
-<!--        {{rfRegister.controls|json}}-->
-<!--  </pre>-->
-</div>
+<hr>
+<pre>
+        {{rfRegister.controls['inputSurname']?.errors |json}}
+</pre>
