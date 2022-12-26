@@ -3,34 +3,51 @@
     <h2 class="wrapper__title">Đăng ký</h2>
     <form action="" (ngSubmit)="onSubmit(rfRegister)" class="form__div" [formGroup]="rfRegister">
       <!--      form tương ứng với form gần nhất hoặc form array-->
-
       <div class="wrapper__form">
         <div class="form__item">
-          <input class="item__input" type="text" placeholder="Tên" formControlName="inputSurname">
-          <span class="item__error" *ngIf="rfRegister.controls['inputSurname'].errors">Surname is required</span>
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextSurname"></ng-container>
         </div>
         <div class="form__item">
-          <input class="item__input" type="text" placeholder="Họ" formControlName="inputName">
-          <span class="item__error" *ngIf="rfRegister.controls['inputSurname'].errors">Name is Required</span>
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextName"></ng-container>
         </div>
+        <span class="item__error"
+              *ngIf="(rfRegister.controls['inputSurname'].errors|| rfRegister.controls['inputName'].errors) && isSubmit"
+        >Hãy nhập {{ rfRegister.controls['inputSurname'].errors ? 'họ ' : '' }}
+          {{ rfRegister.controls['inputSurname'].errors && rfRegister.controls['inputName'].errors ? 'và ' : ''}}
+          {{ rfRegister.controls['inputName'].errors ? 'tên ' : ''}}
+        </span>
         <div class="form__item form__email">
-          <input class="item__input" type="text" placeholder="Email" formControlName="inputEmail">
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextEmail"></ng-container>
+        </div>
+        <div class="form__item form__password">
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextPassword"></ng-container>
+        </div>
+        <div class="form__item form__password">
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextConfirm"></ng-container>
         </div>
 
-        <span class="">
-        Sử dụng chữ cái, số và dấu chấm</span>
+        <span class="email__supp">Sử dụng chữ cái, số và dấu chấm</span>
       </div>
+      <button class="btn__submit" type="submit">Tiếp theo</button>
+      <ng-template #TmplInput
+                   let-controlName="controlName"
+                   let-displayName="displayName"
+      >
+        <input class="item__input" type="text" [placeholder]="displayName" [formControlName]="controlName"
+               [class.input__error]="rfRegister.get(controlName)?.errors && isSubmit"
+               required>
+      </ng-template>
 
-      <button class="btn__submit" type="submit" >Tiếp theo</button>
     </form>
 
   </div>
 
 </div>
+
+
 <pre>
-    {{rfRegister.value | json}}
-  </pre>
-<hr>
-<pre>
-        {{rfRegister.controls['inputSurname']?.errors |json}}
+  {{rfRegister.get('inputSurName')?.value |json}}
+  {{rfRegister.get('inputName')?.value |json}}
 </pre>
+
+
